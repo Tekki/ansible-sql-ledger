@@ -1,0 +1,12 @@
+---
+# these tasks install the basic modules
+
+- name: install basic packages
+  apt: name={{ item }} state=latest
+  check_mode: no
+  with_items:
+    - gcc
+    - cpanminus
+    - git-core
+    - make
+    - python-apt

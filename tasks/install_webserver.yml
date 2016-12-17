@@ -1,0 +1,27 @@
+---
+
+- name: install httpd
+  apt: name={{ item }} state=latest
+  with_items:
+    - apache2
+
+- name: copy site config
+  template: src=sql-ledger.httpd.conf  dest=/etc/apache2/sites-available/sql-ledger.conf
+  notify:
+    - reload apache2
+
+- name: check if site is activated
+  command: a2query -s sql-ledger
+  ignore_errors: true
+  register: sitequery
+
+- name: activate site
+  command: a2ensite sql-ledger
+  when: sitequery|failed
+  notify:
+    - reload apache2
+
+- name: enable cgid module
+  apache2_module: name=cgid state=present
+  notify:
+    - restart apache2

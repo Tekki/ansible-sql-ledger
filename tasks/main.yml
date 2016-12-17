@@ -1,0 +1,9 @@
+---
+# tasks file for sql-ledger
+
+- include: install_basics.yml
+- include: install_postgres.yml
+- include: install_latex.yml
+  when: sl_latex == 1
+- include: install_sql-ledger.yml
+- include: install_webserver.yml
