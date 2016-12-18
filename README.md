@@ -61,6 +61,8 @@ To install the original version from DWS under /sl-dws, write:
       roles:
         - { role: sql-ledger, httpd_path: /var/www/sl-dws, httpd_url: sl-dws, git_branch: master}
 
+It is possible to install the role multiple times under different URLs on the same server.
+
 If your hosts are defined in *sql-ledger.hosts* in this way:
 
     [sql-ledger-servers]
