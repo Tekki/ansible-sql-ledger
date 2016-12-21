@@ -19,6 +19,9 @@
     - spool
     - templates
 
+- include: set_admin_pwd.yml
+  when: sl_admin_pwd is defined
+
 - name: change permissions
   file:
     dest: "{{ httpd_path }}/{{ item }}"

@@ -38,9 +38,10 @@ The following variables can be passed to this role:
 | httpd_group | www-data | group of the httpd user |
 | postgres_user | sql-ledger | user name to connect to PostgreSQL |
 | postgres_version | 9.4 | PostgreSQL version |
-| sl_login_language | | language of the login screen |
+| sl_admin_pwd | *undefined* | password for admin.pl |
 | sl_dvipdf | 0 | use dvipdf instead of pdflatex |
 | sl_latex | 1 | install and use LaTeX |
+| sl_login_language | | language of the login screen |
 | sl_sendmail | "\| /usr/sbin/sendmail -f <%from%> -t" | pipe to sendmail |
 | texlive_lang | german | language of texlive that will be installed |
 
@@ -55,11 +56,20 @@ To install with the default settings and language German/Switzerland (chd_utf) o
       roles:
          - { role: sql-ledger, sl_login_language: chd_utf }
 
-To install the original version from DWS under /sl-dws, write:
+If you want to set the password for admin.pl to '12345678' (probably not a good idea), write:
 
     - hosts: sql-ledger-servers
       roles:
-        - { role: sql-ledger, httpd_path: /var/www/sl-dws, httpd_url: sl-dws, git_branch: master}
+         - { role: sql-ledger, sl_admin_pwd: 12345678 }
+
+Use the [Vault](http://docs.ansible.com/ansible/playbooks_vault.html) to protect your
+passwords!
+
+To make the original version from DWS available under /sl-dws, write:
+
+    - hosts: sql-ledger-servers
+      roles:
+        - { role: sql-ledger, httpd_path: /var/www/sl-dws, httpd_url: sl-dws, git_branch: master }
 
 It is possible to install the role multiple times under different URLs on the same server.
 
@@ -82,4 +92,4 @@ To update the installation, simply run the playbook again.
 License
 -------
 
-GPL3
+[GPL3](LICENSE)
