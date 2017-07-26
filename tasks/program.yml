@@ -2,19 +2,19 @@
 
 - name: clone from Github
   git:
-    repo: "{{ git_source }}"
-    version: "{{ git_branch }}"
-    dest: "{{ httpd_path }}"
+    repo: "{{ sl_git_source }}"
+    version: "{{ sl_git_branch }}"
+    dest: "{{ sl_httpd_path }}"
     accept_hostkey: yes
 
 - name: copy config files
-  template: src={{ item }} dest={{ httpd_path }}/{{ item }}
+  template: src={{ item }} dest={{ sl_httpd_path }}/{{ item }}
   with_items:
     - sql-ledger.conf
     - wlprinter.conf
 
 - name: create directories
-  file: dest={{ httpd_path }}/{{ item }} state=directory
+  file: dest={{ sl_httpd_path }}/{{ item }} state=directory
   with_items:
     - spool
     - templates
@@ -24,7 +24,7 @@
 
 - name: change permissions
   file:
-    dest: "{{ httpd_path }}/{{ item }}"
+    dest: "{{ sl_httpd_path }}/{{ item }}"
     owner: "{{ httpd_user }}"
     group: "{{ httpd_group }}"
     recurse: yes

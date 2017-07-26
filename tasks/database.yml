@@ -1,0 +1,22 @@
+---
+
+- name: locate postgres config
+  command: pg_conftool -s show hba_file
+  register: pg_hba_conf
+  changed_when: false
+
+- name: change permissions
+  replace:
+    dest: "{{ pg_hba_conf.stdout }}"
+    regexp: '(local.+all.+.all.+)peer'
+    replace: '\1trust'
+  notify: restart postgres
+
+- name: check if sql-ledger user exists
+  command: su postgres -c 'psql -c "select * from pg_user"' warn=no
+  changed_when: false
+  register: pg_user
+
+- name: create user for sql-ledger
+  command: su postgres -c 'createuser -d -R -S {{ sl_postgres_user }}' warn=no
+  when: pg_user.stdout.find( sl_postgres_user ) == -1

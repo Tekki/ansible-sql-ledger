@@ -15,12 +15,11 @@ or higher installed. For detailed information how to obtain current packages for
 distribution of choice have a look at the
 [Ansible documentation](https://docs.ansible.com/ansible/intro_installation.html).
 
-The target machine only needs SSH access and Python installed. As standard Debian 
-comes without sudo, you have to define the su access in your host configuration:
+The target machine needs SSH access and Python and sudo installed. As standard Debian
+comes without sudo, you should install it and update your host configuration:
 
     ansible_become: true
-    ansible_become_method: su
-    ansible_become_pass: "{{ vault_root_pwd }}"
+    ansible_become_pass: "{{ vault_sudo_pwd }}"
 
 Role Variables
 --------------
@@ -29,19 +28,15 @@ The following variables can be passed to this role:
 
 | Variable Name | Default Value | Description |
 | ------------- | ------------- | ----------- |
-| dbd_pg_version | 3.2.1 | version of DBD::Pg |
-| git_source | https://github.com/Tekki/sql-ledger.git | URL of the Git repository |
-| git_branch | full | branch that will be checked out |
-| httpd_path | /var/www/sql-ledger | local path of the installation |
-| httpd_url | sql-ledger | browser URL on the server |
-| httpd_user | www-data | user that owns the httpd process |
-| httpd_group | www-data | group of the httpd user |
-| postgres_user | sql-ledger | user name to connect to PostgreSQL |
-| postgres_version | 9.4 | PostgreSQL version |
 | sl_admin_pwd | *undefined* | password for admin.pl |
 | sl_dvipdf | 0 | use dvipdf instead of pdflatex |
+| sl_git_branch | full | branch that will be checked out |
+| sl_git_source | https://github.com/Tekki/sql-ledger.git | URL of the Git repository |
+| sl_httpd_path | /var/www/sql-ledger | local path of the installation |
+| sl_httpd_url | sql-ledger | browser URL on the server |
 | sl_latex | 1 | install and use LaTeX |
 | sl_login_language | | language of the login screen |
+| sl_postgres_user | sql-ledger | user name to connect to PostgreSQL |
 | sl_sendmail | "\| /usr/sbin/sendmail -f <%from%> -t" | pipe to sendmail |
 | texlive_lang | german | language of texlive that will be installed |
 
@@ -69,7 +64,7 @@ To make the original version from DWS available under /sl-dws, write:
 
     - hosts: sql-ledger-servers
       roles:
-        - { role: sql-ledger, httpd_path: /var/www/sl-dws, httpd_url: sl-dws, git_branch: master }
+        - { role: sql-ledger, sl_httpd_path: /var/www/sl-dws, sl_httpd_url: sl-dws, sl_git_branch: master }
 
 It is possible to install the role multiple times under different URLs on the same server.
 

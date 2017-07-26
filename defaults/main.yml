@@ -1,17 +1,23 @@
 ---
 # defaults file for sql-ledger
 
-dbd_pg_version: 3.2.1
-git_source: https://github.com/Tekki/sql-ledger.git
-git_branch: full
-httpd_path: /var/www/sql-ledger
-httpd_url: sql-ledger
-httpd_user: www-data
-httpd_group: www-data
-postgres_user: sql-ledger
-postgres_version: 9.4
+debian_packages:
+  - apache2
+  - git-core
+  - postgresql
+  - libdbd-pg-perl
+  - texlive
+  - texlive-fonts-extra
+debian_vars:
+  httpd_user: www-data
+  httpd_group: www-data
+sl_git_branch: full
+sl_git_source: https://github.com/Tekki/sql-ledger.git
+sl_httpd_path: /var/www/sql-ledger
+sl_httpd_url: sql-ledger
 sl_login_language:
 sl_dvipdf: 0
 sl_latex: 1
+sl_postgres_user: sql-ledger
 sl_sendmail: "| /usr/sbin/sendmail -f <%from%> -t"
 texlive_lang: german

@@ -6,15 +6,15 @@
   register: encrypted_pwd
 
 - name: copy members file
-  template: src=members dest={{ httpd_path }}/users/members force=no
+  template: src=members dest={{ sl_httpd_path }}/users/members force=no
 
 - name: update password
   replace:
-    dest: "{{ httpd_path }}/users/members"
+    dest: "{{ sl_httpd_path }}/users/members"
     regexp: '(\[root login\]\npassword=).*'
     replace: '\1{{ encrypted_pwd.stdout }}'
   register: update_pwd
 
 - name: remove config file
-  file: dest="{{ httpd_path }}/users/root login.conf" state=absent
+  file: dest="{{ sl_httpd_path }}/users/root login.conf" state=absent
   when: update_pwd|changed

@@ -1,8 +1,6 @@
 ---
 
-- name: install texlive (be patient!)
+- name: install texlive-lang
   apt: name={{ item }} state=latest
   with_items:
-    - texlive
     - texlive-lang-{{ texlive_lang }}
-    - texlive-fonts-extra
