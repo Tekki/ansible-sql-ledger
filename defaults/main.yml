@@ -8,6 +8,7 @@ debian_packages:
   - libdbd-pg-perl
   - texlive
   - texlive-fonts-extra
+  - texlive-xetex
 debian_vars:
   httpd_user: www-data
   httpd_group: www-data
@@ -18,6 +19,8 @@ sl_httpd_url: sql-ledger
 sl_login_language:
 sl_dvipdf: 0
 sl_latex: 1
+sl_pdftk: 1
 sl_postgres_user: sql-ledger
+sl_xelatex: 0
 sl_sendmail: "| /usr/sbin/sendmail -f <%from%> -t"
 texlive_lang: german

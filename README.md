@@ -36,8 +36,10 @@ The following variables can be passed to this role:
 | sl_httpd_url | sql-ledger | browser URL on the server |
 | sl_latex | 1 | install and use LaTeX |
 | sl_login_language | | language of the login screen |
+| sl_pdftk | 1 | use pdftk to combine PDFs |
 | sl_postgres_user | sql-ledger | user name to connect to PostgreSQL |
 | sl_sendmail | "\| /usr/sbin/sendmail -f <%from%> -t" | pipe to sendmail |
+| sl_xelatex | 0 | use xelatex instead of pdflatex |
 | texlive_lang | german | language of texlive that will be installed |
 
 Please notice that this role doesn't install any mail transport agent.
