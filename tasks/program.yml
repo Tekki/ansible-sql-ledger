@@ -1,17 +1,16 @@
 ---
 
+- name: Debian specifics
+  set_fact:
+    httpd_user: "{{ debian_vars.httpd_user }}"
+    httpd_group: "{{ debian_vars.httpd_group }}"
+
 - name: clone from Github
   git:
     repo: "{{ sl_git_source }}"
     version: "{{ sl_git_branch }}"
     dest: "{{ sl_httpd_path }}"
     accept_hostkey: yes
-
-- name: copy config files
-  template: src={{ item }} dest={{ sl_httpd_path }}/{{ item }}
-  with_items:
-    - sql-ledger.conf
-    - wlprinter.conf
 
 - name: create directories
   file: dest={{ sl_httpd_path }}/{{ item }} state=directory

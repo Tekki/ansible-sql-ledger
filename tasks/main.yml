@@ -1,9 +1,16 @@
 ---
 # tasks file for sql-ledger
 
-- include: debian_basics.yml
-- include: database.yml
-- include: latex.yml
-  when: sl_latex == 1
-- include: program.yml
-- include: webserver.yml
+- import_tasks: debian_basics.yml
+  tags: [sl-basics]
+- import_tasks: database.yml
+  tags: [sl-database]
+- include_tasks: latex.yml
+  when: sl_latex
+  tags: [sl-latex]
+- import_tasks: program.yml
+  tags: [sl-git]
+- import_tasks: config.yml
+  tags: [sl-config]
+- import_tasks: webserver.yml
+  tags: [sl-webserver]

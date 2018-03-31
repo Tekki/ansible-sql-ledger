@@ -1,11 +1,6 @@
 ---
 # install the basic packages on Debian
 
-- name: Debian specifics
-  set_fact:
-    httpd_user: "{{ debian_vars.httpd_user }}"
-    httpd_group: "{{ debian_vars.httpd_group }}"
-
 - name: make sure aptitude is installed
   apt: name=aptitude state=latest
 

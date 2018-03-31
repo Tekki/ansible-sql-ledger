@@ -17,4 +17,4 @@
 
 - name: remove config file
   file: dest="{{ sl_httpd_path }}/users/root login.conf" state=absent
-  when: update_pwd|changed
+  when: update_pwd is changed

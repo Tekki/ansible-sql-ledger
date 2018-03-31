@@ -1,0 +1,7 @@
+---
+
+- name: copy config files
+  template: src={{ item }} dest={{ sl_httpd_path }}/{{ item }}
+  with_items:
+    - sql-ledger.conf
+    - wlprinter.conf
