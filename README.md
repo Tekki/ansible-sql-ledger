@@ -1,7 +1,7 @@
 Ansible Role for SQL-Ledger
 ===========================
 
-This role allows you to install SQL-Ledger on Debian Jessie.
+This role allows you to install [SQL-Ledger](https://github.com/Tekki/sql-ledger) on Debian Stretch.
 
 Clone it to your Ansible roles directory:
 
@@ -13,7 +13,7 @@ Prerequisites
 The machine from which the playbook is being run needs to have Ansible 2.0
 or higher installed. For detailed information how to obtain current packages for your
 distribution of choice have a look at the
-[Ansible documentation](https://docs.ansible.com/ansible/intro_installation.html).
+[Ansible documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 
 The target machine needs SSH access and Python and sudo installed. As standard Debian
 comes without sudo, you should install it and update your host configuration:
@@ -59,7 +59,7 @@ If you want to set the password for admin.pl to '12345678' (probably not a good 
       roles:
          - { role: sql-ledger, sl_admin_pwd: 12345678 }
 
-Use the [Vault](http://docs.ansible.com/ansible/playbooks_vault.html) to protect your
+Use the [Vault](http://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html) to protect your
 passwords!
 
 To make the original version from DWS available under /sl-dws, write:
