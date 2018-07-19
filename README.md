@@ -32,6 +32,7 @@ The following variables can be passed to this role:
 | sl_dvipdf | false | use dvipdf instead of pdflatex |
 | sl_git_branch | full | branch that will be checked out |
 | sl_git_source | https://github.com/Tekki/sql-ledger.git | URL of the Git repository |
+| sl_helpful_login | false | helpful error messages on login screen |
 | sl_httpd_path | /var/www/sql-ledger | local path of the installation |
 | sl_httpd_url | sql-ledger | browser URL on the server |
 | sl_latex | true | install and use LaTeX |

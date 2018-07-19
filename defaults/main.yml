@@ -14,6 +14,7 @@ debian_vars:
   httpd_group: www-data
 sl_git_branch: full
 sl_git_source: https://github.com/Tekki/sql-ledger.git
+sl_helpful_login: false
 sl_httpd_path: /var/www/sql-ledger
 sl_httpd_url: sql-ledger
 sl_login_language:
