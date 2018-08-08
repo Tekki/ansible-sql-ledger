@@ -6,7 +6,7 @@
   register: encrypted_pwd
 
 - name: copy members file
-  template: src=members dest={{ sl_httpd_path }}/users/members force=no
+  template: src=members.j2 dest={{ sl_httpd_path }}/users/members force=no
 
 - name: update password
   replace:

@@ -36,3 +36,14 @@ Alias /{{ sl_httpd_url }} {{ sl_httpd_path }}/
   Order Deny,Allow
   Deny from All
 </Directory>
+{% if sl_protect_admin %}
+
+<Directory {{ sl_httpd_path }}>
+  <Files "admin.pl">
+    AuthName "SQL-Ledger Admin"
+    AuthType Basic
+    AuthUserFile {{ sl_httpd_config }}/.slpasswd
+    require valid-user
+  </Files>
+</Directory>
+{% endif %}

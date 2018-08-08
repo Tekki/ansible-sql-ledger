@@ -6,6 +6,7 @@ debian_packages:
   - git-core
   - postgresql
   - libdbd-pg-perl
+  - python-passlib
   - texlive
   - texlive-fonts-extra
   - texlive-xetex
@@ -15,6 +16,7 @@ debian_vars:
 sl_git_branch: full
 sl_git_source: https://github.com/Tekki/sql-ledger.git
 sl_helpful_login: false
+sl_httpd_config: /etc/apache2
 sl_httpd_path: /var/www/sql-ledger
 sl_httpd_url: sql-ledger
 sl_login_language:
@@ -22,6 +24,7 @@ sl_dvipdf: false
 sl_latex: true
 sl_pdftk: true
 sl_postgres_user: sql-ledger
+sl_protect_admin: false
 sl_xelatex: false
 sl_sendmail: "| /usr/sbin/sendmail -f <%from%> -t"
 texlive_lang: german

@@ -2,7 +2,7 @@
 
 - name: copy site config
   template:
-    src: sql-ledger.httpd.conf
+    src: sql-ledger.httpd.conf.j2
     dest: "/etc/apache2/sites-available/{{ sl_httpd_url }}.conf"
   notify:
     - reload apache2
@@ -23,3 +23,10 @@
   apache2_module: name=cgid state=present
   notify:
     - restart apache2
+
+- name: update password file
+  htpasswd:
+    path: "{{ sl_httpd_config }}/.slpasswd"
+    name: "{{ sl_protect_username }}"
+    password: "{{ sl_protect_password }}"
+  when: sl_protect_admin

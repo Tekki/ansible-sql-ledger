@@ -1,5 +1,4 @@
-Ansible Role for SQL-Ledger
-===========================
+# Ansible Role for SQL-Ledger
 
 This role allows you to install [SQL-Ledger](https://github.com/Tekki/sql-ledger) on Debian Stretch.
 
@@ -7,8 +6,7 @@ Clone it to your Ansible roles directory:
 
     git clone https://github.com/Tekki/ansible-sql-ledger.git path_to_ansible/roles/sql-ledger
 
-Prerequisites
--------------
+## Prerequisites
 
 The machine from which the playbook is being run needs to have Ansible 2.0
 or higher installed. For detailed information how to obtain current packages for your
@@ -21,8 +19,7 @@ comes without sudo, you should install it and update your host configuration:
     ansible_become: true
     ansible_become_pass: "{{ vault_sudo_pwd }}"
 
-Role Variables
---------------
+## Role Variables
 
 The following variables can be passed to this role:
 
@@ -33,20 +30,23 @@ The following variables can be passed to this role:
 | sl_git_branch | full | branch that will be checked out |
 | sl_git_source | https://github.com/Tekki/sql-ledger.git | URL of the Git repository |
 | sl_helpful_login | false | helpful error messages on login screen |
+| sl_httpd_config | /etc/apache2 | path to the webserver config |
 | sl_httpd_path | /var/www/sql-ledger | local path of the installation |
 | sl_httpd_url | sql-ledger | browser URL on the server |
 | sl_latex | true | install and use LaTeX |
 | sl_login_language | | language of the login screen |
 | sl_pdftk | true | use pdftk to combine PDFs |
 | sl_postgres_user | sql-ledger | user name to connect to PostgreSQL |
+| sl_protect_admin | false | protect admin interface |
+| sl_protect_password | | password for protected admin interface |
+| sl_protect_username | | username for protected admin interface |
 | sl_sendmail | "\| /usr/sbin/sendmail -f <%from%> -t" | pipe to sendmail |
 | sl_xelatex | false | use XeLaTex instead of pdflatex |
 | texlive_lang | german | language of TeX Live that will be installed |
 
 Please notice that this role doesn't install any mail transport agent.
 
-Example Playbook
-----------------
+## Example Playbook
 
 To install with the default settings and language German/Switzerland (chd_utf) on the login screen, use the following playbook:
 
@@ -91,7 +91,7 @@ The available tags are:
 - `sl-database` configures the access to the database
 - `sl-git` downloads SQL-Ledger from GitHub
 - `sl-latex` installs LaTeX, if *sl_latex* is true
-- `sl-webserver` configures the webserver
+- `sl-webserver` configures the webserver, including password protection
 
 Update
 ------
@@ -101,7 +101,6 @@ to download a new version:
 
     ansible-playbook -t sl-git sql-ledger.yml
 
-License
--------
+## License
 
 [GPL3](LICENSE)
