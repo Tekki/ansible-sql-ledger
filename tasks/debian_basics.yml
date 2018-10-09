@@ -2,7 +2,9 @@
 # install the basic packages on Debian
 
 - name: make sure aptitude is installed
-  apt: name=aptitude state=latest
+  apt:
+    name: aptitude 
+    state: latest
 
 - name: update repo cache
   apt:
@@ -11,6 +13,7 @@
   changed_when: false
 
 - name: install basic packages
-  apt: name={{ item }} state=latest
+  apt:
+    name:  "{{ debian_packages }}"
+    state: latest
   check_mode: no
-  with_items: "{{ debian_packages }}"
