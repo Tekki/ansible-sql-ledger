@@ -10,6 +10,7 @@ debian_packages:
   - texlive
   - texlive-fonts-extra
   - texlive-xetex
+  - fonts-liberation
 debian_vars:
   httpd_user: www-data
   httpd_group: www-data
