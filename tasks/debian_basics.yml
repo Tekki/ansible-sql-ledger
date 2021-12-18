@@ -3,17 +3,17 @@
 
 - name: make sure aptitude is installed
   apt:
-    name: aptitude 
+    name: aptitude
     state: latest
 
 - name: update repo cache
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
   changed_when: false
 
 - name: install basic packages
   apt:
-    name:  "{{ debian_packages }}"
+    name: "{{ debian_packages }}"
     state: latest
-  check_mode: no
+  check_mode: false

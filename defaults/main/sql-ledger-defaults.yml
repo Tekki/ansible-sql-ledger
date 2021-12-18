@@ -6,6 +6,7 @@ debian_packages:
   - git-core
   - postgresql
   - libdbd-pg-perl
+  - libexcel-writer-xlsx-perl
   - python-passlib
   - texlive
   - texlive-fonts-extra
