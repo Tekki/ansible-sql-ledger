@@ -1,6 +1,6 @@
 ---
 
 - name: install texlive-lang
-  apt: name={{ item }} state=latest
-  with_items:
-    - texlive-lang-{{ texlive_lang }}
+  apt:
+    name: "texlive-lang-{{ texlive_lang}}"
+    state: latest

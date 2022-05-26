@@ -1,22 +1,24 @@
 ---
 # defaults file for sql-ledger
 
+debian_additional_packages: []
 debian_packages:
   - apache2
   - git-core
   - postgresql
   - libdbd-pg-perl
   - libexcel-writer-xlsx-perl
-  - python-passlib
+  - libmojolicious-perl
+  - python3-passlib
   - texlive
-  - texlive-fonts-extra
   - texlive-xetex
+  - texlive-fonts-extra
   - fonts-liberation
 debian_vars:
   httpd_user: www-data
   httpd_group: www-data
 sl_git_branch: full
-sl_git_source: https://github.com/Tekki/sql-ledger.git
+sl_git_source: https://github.com/Tekki/sql-ledger
 sl_helpful_login: false
 sl_httpd_config: /etc/apache2
 sl_httpd_path: /var/www/sql-ledger

@@ -1,6 +1,7 @@
 # Ansible Role for SQL-Ledger
 
-This role allows you to install [SQL-Ledger](https://github.com/Tekki/sql-ledger) on Debian Stretch.
+This role allows you to install
+[SQL-Ledger](https://github.com/Tekki/sql-ledger) on Debian Bullseye.
 
 Clone it to your Ansible roles directory:
 
@@ -23,45 +24,50 @@ comes without sudo, you should install it and update your host configuration:
 
 The following variables can be passed to this role:
 
-| Variable Name | Default Value | Description |
-| ------------- | ------------- | ----------- |
-| sl\_admin\_pwd | *undefined* | password for admin.pl |
-| sl\_dvipdf | false | use dvipdf instead of pdflatex |
-| sl\_git\_branch | full | branch that will be checked out |
-| sl\_git\_source | https://github.com/Tekki/sql-ledger.git | URL of the Git repository |
-| sl\_helpful\_login | false | helpful error messages on login screen |
-| sl\_httpd\_config | /etc/apache2 | path to the webserver config |
-| sl\_httpd\_path | /var/www/sql-ledger | local path of the installation |
-| sl\_httpd\_url | sql-ledger | browser URL on the server |
-| sl\_latex | true | install and use LaTeX |
-| sl\_login\_language | | language of the login screen |
-| sl\_pdftk | true | use pdftk to combine PDFs |
-| sl\_postgres\_user | sql-ledger | user name to connect to PostgreSQL |
-| sl\_protect\_admin | false | protect admin interface |
-| sl\_protect\_password | | password for protected admin interface |
-| sl\_protect\_username | | username for protected admin interface |
-| sl\_sendmail | "\| /usr/sbin/sendmail -f <%from%> -t" | pipe to sendmail |
-| sl\_xelatex | false | use XeLaTex instead of pdflatex |
-| texlive\_lang | german | language of TeX Live that will be installed |
+| Variable Name                | Default Value                           | Description                                 |
+|------------------------------|-----------------------------------------|---------------------------------------------|
+| debian\_additional\_packages | []                                      | additional packages to be installed         |
+| sl\_admin\_pwd               | *undefined*                             | password for admin.pl                       |
+| sl\_dvipdf                   | false                                   | use dvipdf instead of pdflatex              |
+| sl\_git\_branch              | full                                    | branch that will be checked out             |
+| sl\_git\_source              | https://github.com/Tekki/sql-ledger.git | URL of the Git repository                   |
+| sl\_helpful\_login           | false                                   | helpful error messages on login screen      |
+| sl\_httpd\_config            | /etc/apache2                            | path to the webserver config                |
+| sl\_httpd\_path              | /var/www/sql-ledger                     | local path of the installation              |
+| sl\_httpd\_url               | sql-ledger                              | browser URL on the server                   |
+| sl\_latex                    | true                                    | install and use LaTeX                       |
+| sl\_login\_language          |                                         | language of the login screen                |
+| sl\_pdftk                    | true                                    | use pdftk to combine PDFs                   |
+| sl\_postgres\_user           | sql-ledger                              | user name to connect to PostgreSQL          |
+| sl\_protect\_admin           | false                                   | protect admin interface                     |
+| sl\_protect\_password        |                                         | password for protected admin interface      |
+| sl\_protect\_username        |                                         | username for protected admin interface      |
+| sl\_sendmail                 | "\| /usr/sbin/sendmail -f <%from%> -t"  | pipe to sendmail                            |
+| sl\_xelatex                  | false                                   | use XeLaTex instead of pdflatex             |
+| texlive\_lang                | german                                  | language of TeX Live that will be installed |
 
-Please notice that this role doesn't install any mail transport agent.
+Please notice that this role doesn't install a mail transport agent or printing
+system.
 
 ## Example Playbook
 
-To install with the default settings and language German/Switzerland (chd\_utf) on the login screen, use the following playbook:
+To install with the default settings and language German/Switzerland (chd\_utf)
+on the login screen, use the following playbook:
 
     - hosts: sql-ledger-servers
       roles:
          - { role: sql-ledger, sl_login_language: chd_utf }
 
-If you want to set the password for admin.pl to '12345678' (probably not a good idea), write:
+If you want to set the password for admin.pl to '12345678' (probably not a good
+idea), write:
 
     - hosts: sql-ledger-servers
       roles:
          - { role: sql-ledger, sl_admin_pwd: 12345678 }
 
-Use the [Vault](http://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html) to protect your
-passwords!
+Use the
+[Vault](http://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html)
+to protect your passwords!
 
 To make the original version from DWS available under /sl-dws, write:
 
@@ -69,14 +75,16 @@ To make the original version from DWS available under /sl-dws, write:
       roles:
         - { role: sql-ledger, sl_httpd_path: /var/www/sl-dws, sl_httpd_url: sl-dws, sl_git_branch: master }
 
-It is possible to install the role multiple times under different URLs on the same server.
+It is possible to install the role multiple times under different URLs on the
+same server.
 
 If your hosts are defined in *sql-ledger.hosts* in this way:
 
     [sql-ledger-servers]
     sl-server-[01:05]
 
-and the name of the playbook is *sql-ledger.yml*, you can start the installation with:
+and the name of the playbook is *sql-ledger.yml*, you can start the
+installation with:
 
     ansible-playbook -i sql-ledger.hosts sql-ledger.yml
 
@@ -96,8 +104,8 @@ The available tags are:
 Update
 ------
 
-To update the installation, simply run the playbook again. If you just want
-to download a new version:
+To update the installation, simply run the playbook again. If you just want to
+download a new version:
 
     ansible-playbook -t sl-git sql-ledger.yml
 

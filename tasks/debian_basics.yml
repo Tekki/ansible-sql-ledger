@@ -17,3 +17,9 @@
     name: "{{ debian_packages }}"
     state: latest
   check_mode: false
+
+- name: install additional packages
+  apt:
+    name: "{{ debian_additional_packages }}"
+    state: latest
+  check_mode: false
