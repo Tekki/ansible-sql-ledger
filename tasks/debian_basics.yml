@@ -23,3 +23,6 @@
     name: "{{ debian_additional_packages }}"
     state: latest
   check_mode: false
+
+- name: set time zone
+  command: "timedatectl set-timezone {{ sl_timezone }}"

@@ -31,4 +31,5 @@ sl_postgres_user: sql-ledger
 sl_protect_admin: false
 sl_xelatex: false
 sl_sendmail: "| /usr/sbin/sendmail -f <%from%> -t"
+sl_timezone: Europe/Zurich
 texlive_lang: german

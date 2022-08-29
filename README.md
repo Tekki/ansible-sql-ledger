@@ -43,6 +43,7 @@ The following variables can be passed to this role:
 | sl\_protect\_password        |                                         | password for protected admin interface      |
 | sl\_protect\_username        |                                         | username for protected admin interface      |
 | sl\_sendmail                 | "\| /usr/sbin/sendmail -f <%from%> -t"  | pipe to sendmail                            |
+| sl\_timezone                 | Europe/Zurich                           | time zone for server                        |
 | sl\_xelatex                  | false                                   | use XeLaTex instead of pdflatex             |
 | texlive\_lang                | german                                  | language of TeX Live that will be installed |
 
