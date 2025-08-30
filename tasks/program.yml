@@ -12,13 +12,15 @@
     dest: "{{ sl_httpd_path }}"
     accept_hostkey: true
 
-- name: create directories
-  file: dest={{ sl_httpd_path }}/{{ item }} state=directory
-  with_items:
+- name: create subdirectories
+  file:
+    dest: "{{ sl_httpd_path }}/{{ item }}"
+    state: directory
+  loop:
     - spool
     - templates
 
-- include: set_admin_pwd.yml
+- include_tasks: set_admin_pwd.yml
   when: sl_admin_pwd is defined
 
 - name: change permissions
@@ -27,9 +29,16 @@
     owner: "{{ httpd_user }}"
     group: "{{ httpd_group }}"
     recurse: true
-  with_items:
+  loop:
     - css
     - images
     - spool
     - templates
     - users
+
+- name: create gpg directory
+  file:
+    dest: "{{ sl_gpg_path }}"
+    state: directory
+    owner: "{{ httpd_user }}"
+    group: "{{ httpd_group }}"

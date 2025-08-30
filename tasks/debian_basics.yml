@@ -6,6 +6,18 @@
     name: aptitude
     state: latest
 
+- name: activate locale
+  replace:
+    path: /etc/locale.gen
+    regexp: "# ({{ debian_locale }}\\.UTF-8.*)"
+    replace: '\1'
+
+- name: generate locales
+  command: locale-gen
+
+- name: update locale
+  command: "update-locale LANG={{ default_locale }}.UTF-8"
+
 - name: update repo cache
   apt:
     update_cache: true

@@ -2,21 +2,30 @@
 # defaults file for sql-ledger
 
 debian_additional_packages: []
+debian_locale: en_US
 debian_packages:
   - apache2
   - git-core
+  - gpg
+  - gpg-agent
   - postgresql
+  - libarchive-extract-perl
+  - libarchive-zip-perl
   - libdbd-pg-perl
   - libexcel-writer-xlsx-perl
+  - libio-socket-ssl-perl
   - libmojolicious-perl
+  - libspreadsheet-parsexlsx-perl
+  - libtext-qrcode-perl
   - python3-passlib
+debian_latex_packages:
   - texlive
-  - texlive-xetex
   - texlive-fonts-extra
   - fonts-liberation
 debian_vars:
   httpd_user: www-data
   httpd_group: www-data
+sl_gpg_path: /var/www/gnupg
 sl_git_branch: full
 sl_git_source: https://github.com/Tekki/sql-ledger
 sl_helpful_login: false
@@ -26,10 +35,10 @@ sl_httpd_url: sql-ledger
 sl_login_language:
 sl_dvipdf: false
 sl_latex: true
-sl_pdftk: true
+sl_latex_pdftk: true
+sl_latex_xelatex: true
 sl_postgres_user: sql-ledger
 sl_protect_admin: false
-sl_xelatex: false
 sl_sendmail: "| /usr/sbin/sendmail -f <%from%> -t"
 sl_timezone: Europe/Zurich
-texlive_lang: german
+texlive_lang: english

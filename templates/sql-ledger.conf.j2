@@ -1,4 +1,4 @@
-use vars qw($userspath $spool $memberfile $templates $sendmail $images $language $charset $sid $latex $gzip $dvipdf $pdftk $xelatex @accessfolders $helpful_login);
+use vars qw($userspath $spool $memberfile $templates $sendmail $images $language $charset $sid $latex $gzip $gpg $dvipdf $pdftk $xelatex @accessfolders $helpful_login);
 
 # path to user configuration files
 $userspath = "users";
@@ -32,14 +32,17 @@ $latex = {{ 1 if sl_latex else 0 }};
 # program to use for file compression
 $gzip = "gzip -S .gz";
 
+# use gpg for file encryption
+$gpg = "gpg --homedir {{ sl_gpg_path }} --batch --yes";
+
 # use dvipdf instead of pdflatex for PDF
 $dvipdf = {{ 1 if sl_dvipdf else 0 }};
 
 # if you have pdftk installed and want to combine PDFs set to 1
-$pdftk = {{ 1 if sl_pdftk else 0 }};
+$pdftk = {{ 1 if sl_latex_pdftk else 0 }};
 
 # use xelatex instead of pdflatex for PDF
-$xelatex = {{ 1 if sl_xelatex else 0 }};
+$xelatex = {{ 1 if sl_latex_xelatex else 0 }};
 
 # folders with read and write access
 @accessfolders = qw|templates css|;

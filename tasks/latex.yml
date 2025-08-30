@@ -1,5 +1,22 @@
 ---
 
+- name: install latex packages
+  apt:
+    name: "{{ debian_latex_packages }}"
+    state: latest
+
+- name: install xelatex
+  apt:
+    name: texlive-xetex
+    state: latest
+  when: sl_latex_xelatex
+
+- name: install pdftk
+  apt:
+    name: pdftk-java
+    state: latest
+  when: sl_latex_pdftk
+
 - name: install texlive-lang
   apt:
     name: "texlive-lang-{{ texlive_lang}}"
