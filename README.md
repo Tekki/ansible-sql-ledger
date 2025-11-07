@@ -99,7 +99,7 @@ To make the original version from DWS available under /sl-dws, write:
 ```yaml
 sl_httpd_path: /var/www/sl-dws
 sl_httpd_url: sl-dws
-sl_git_branch: master
+sl_git_branch: dws
 ```
 
 It is possible to install the role multiple times under different URLs
@@ -143,6 +143,6 @@ ansible-playbook -t sl-git sql-ledger.yml
 
 ## Copyright and License
 
-© 2016-2025 by Tekki (Rolf Stöckli)
+© 2016-2025 Tekki (Rolf Stöckli)
 
 [GPL3](LICENSE)
