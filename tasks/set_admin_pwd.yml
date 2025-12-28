@@ -3,18 +3,17 @@
 
 - name: encrypt password
   command: perl -e "print crypt '{{ sl_admin_pwd }}', 'root'"
-  register: encrypted_pwd
+  register: sl_encrypted_admin_pwd
 
-- name: copy members file
-  template: src=members.j2 dest={{ sl_httpd_path }}/users/members force=no
+- name: create members file
+  template:
+    src: members_yml.j2
+    dest: "{{ sl_httpd_path }}/users/members.yml"
+    force: false
 
 - name: update password
   replace:
-    dest: "{{ sl_httpd_path }}/users/members"
-    regexp: '(\[root login\]\npassword=).*'
-    replace: '\1{{ encrypted_pwd.stdout }}'
-  register: update_pwd
-
-- name: remove config file
-  file: dest="{{ sl_httpd_path }}/users/root login.conf" state=absent
-  when: update_pwd is changed
+    dest: "{{ sl_httpd_path }}/users/members.yml"
+    regexp: '(root login:\n  password:).*'
+    replace: '\1 {{ sl_encrypted_admin_pwd.stdout }}'
+  notify: update binary config

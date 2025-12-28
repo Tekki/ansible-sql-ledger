@@ -1,10 +1,18 @@
 Alias /{{ sl_httpd_url }} {{ sl_httpd_path }}/
 <Directory {{ sl_httpd_path }}>
+{% if sl_httpd_whitelist is defined %}
+  Require ip {{ sl_httpd_whitelist | join(' ') }}
+{% endif %}
   AllowOverride All
   AddHandler cgi-script .pl
   Options ExecCGI Includes FollowSymlinks
   Order Allow,Deny
   Allow from All
+</Directory>
+
+<Directory {{ sl_httpd_path }}/config>
+  Order Deny,Allow
+  Deny from All
 </Directory>
 
 <Directory {{ sl_httpd_path }}/users>
@@ -40,10 +48,17 @@ Alias /{{ sl_httpd_url }} {{ sl_httpd_path }}/
 
 <Directory {{ sl_httpd_path }}>
   <Files "admin.pl">
+{% if sl_httpd_whitelist is defined %}
+    <RequireAll>
+      Require ip {{ sl_httpd_whitelist | join(' ') }}
+      Require valid-user
+    </RequireAll>
+{% else %}
+    Require valid-user
+{% endif %}
     AuthName "SQL-Ledger Admin"
     AuthType Basic
     AuthUserFile {{ sl_httpd_config }}/.slpasswd
-    require valid-user
   </Files>
 </Directory>
 {% endif %}

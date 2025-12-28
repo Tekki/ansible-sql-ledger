@@ -1,0 +1,70 @@
+---
+# SQL-Ledger config for {{ ansible_hostname }}
+
+## Language
+
+# set language and charset for login and admin
+language: '{{ sl_login_language }}'
+charset: UTF8
+
+## Paths
+
+### path to user configuration files
+userspath: users
+
+### member file
+memberfile: users/members
+
+### spool directory for batch printing
+spool: spool
+
+### templates base directory
+templates: templates
+
+### location for images
+images: images
+
+## External Programs
+
+## set to '' if not available
+
+### command to send e-mails
+sendmail: '{{ sl_sendmail }}'
+
+### program to use for file compression
+gzip: gzip -S .gz
+
+### command to encrypt files
+gpg: gpg --homedir {{ sl_gpg_path }} --batch --yes
+
+## Print Templates
+
+# if you have latex installed set to true
+latex: {{ sl_latex | to_yaml | trim }}
+
+# use xelatex instead of pdflatex for PDF
+xelatex: {{ sl_latex_xelatex | to_yaml | trim }}
+
+# use dvipdf instead of pdflatex or xelatex for PDF
+dvipdf: {{ sl_latex_dvipdf | to_yaml | trim }}
+
+# if you have pdftk installed and want to combine PDFs set to true
+pdftk: {{ sl_latex_pdftk | to_yaml | trim }}
+
+## Security
+
+### file access security
+### folders with read and write access
+accessfolders:
+  - templates
+  - css
+
+### login security
+
+### false: users have to enter their full username and correct password
+### true: displays helpful error messages and lists of similar users
+###       facilitates attacks on the system, not recommended
+helpful_login: {{ sl_helpful_login | to_yaml | trim }}
+
+### TOTP for admins
+admin_totp_activated: {{ sl_totp_admin | to_yaml | trim }}

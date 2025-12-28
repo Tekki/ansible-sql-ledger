@@ -1,16 +1,12 @@
 ---
 
-- name: Debian specifics
-  set_fact:
-    httpd_user: "{{ debian_vars.httpd_user }}"
-    httpd_group: "{{ debian_vars.httpd_group }}"
-
 - name: clone from Github
   git:
     repo: "{{ sl_git_source }}"
     version: "{{ sl_git_branch }}"
     dest: "{{ sl_httpd_path }}"
     accept_hostkey: true
+  notify: run tests
 
 - name: create subdirectories
   file:
@@ -20,14 +16,11 @@
     - spool
     - templates
 
-- include_tasks: set_admin_pwd.yml
-  when: sl_admin_pwd is defined
-
 - name: change permissions
   file:
     dest: "{{ sl_httpd_path }}/{{ item }}"
-    owner: "{{ httpd_user }}"
-    group: "{{ httpd_group }}"
+    owner: "{{ sl_httpd_user }}"
+    group: "{{ sl_httpd_group }}"
     recurse: true
   loop:
     - css
@@ -40,5 +33,5 @@
   file:
     dest: "{{ sl_gpg_path }}"
     state: directory
-    owner: "{{ httpd_user }}"
-    group: "{{ httpd_group }}"
+    owner: "{{ sl_httpd_user }}"
+    group: "{{ sl_httpd_group }}"

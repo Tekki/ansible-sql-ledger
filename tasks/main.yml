@@ -1,6 +1,18 @@
 ---
 # tasks file for sql-ledger
 
+- name: Debian specifics
+  set_fact:
+    sl_httpd_user: "{{ sl_debian_httpd_user }}"
+    sl_httpd_group: "{{ sl_debian_httpd_group }}"
+  tags:
+    - sl-basics
+    - sl-database
+    - sl-latex
+    - sl-program
+    - sl-config
+    - sl-webserver
+
 - import_tasks: debian_basics.yml
   tags: [sl-basics]
 - import_tasks: database.yml
@@ -9,7 +21,7 @@
   when: sl_latex
   tags: [sl-latex]
 - import_tasks: program.yml
-  tags: [sl-git]
+  tags: [sl-program]
 - import_tasks: config.yml
   tags: [sl-config]
 - import_tasks: webserver.yml

@@ -1,22 +1,23 @@
 ---
-# install the basic packages on Debian
+# install the basic packages onsl_debian
 
 - name: make sure aptitude is installed
   apt:
     name: aptitude
     state: latest
 
-- name: activate locale
+- name: activate locales
   replace:
     path: /etc/locale.gen
-    regexp: "# ({{ debian_locale }}\\.UTF-8.*)"
+    regexp: "# ({{ item }}\\.UTF-8.*)"
     replace: '\1'
+  loop: "{{ sl_lx_locales }}"
 
 - name: generate locales
   command: locale-gen
 
-- name: update locale
-  command: "update-locale LANG={{ default_locale }}.UTF-8"
+- name: update default locale
+  command: "update-locale LANG={{ sl_lx_default_locale }}.UTF-8"
 
 - name: update repo cache
   apt:
@@ -26,15 +27,26 @@
 
 - name: install basic packages
   apt:
-    name: "{{ debian_packages }}"
+    name: "{{ sl_debian_packages }}"
     state: latest
-  check_mode: false
 
 - name: install additional packages
   apt:
-    name: "{{ debian_additional_packages }}"
+    name: "{{ sl_debian_additional_packages }}"
     state: latest
-  check_mode: false
+
+- name: install Perl packages
+  apt:
+    name: "{{ sl_debian_perl_packages }}"
+    state: latest
+
+- name: install Perl modules from CPAN
+  command: "cpanm {{ item }}"
+  loop: "{{ sl_debian_perl_cpan }}"
+
+- name: install additional Perl modules from CPAN
+  command: "cpanm {{ item }}"
+  loop: "{{ sl_debian_perl_additional_cpan }}"
 
 - name: set time zone
-  command: "timedatectl set-timezone {{ sl_timezone }}"
+  command: "timedatectl set-timezone {{ sl_lx_timezone }}"

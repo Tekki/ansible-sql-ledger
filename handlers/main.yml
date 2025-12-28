@@ -2,10 +2,26 @@
 # handlers file for sql-ledger
 
 - name: reload apache2
-  service: name=apache2 state=reloaded
+  service:
+    name: apache2
+    state: reloaded
 
 - name: restart apache2
-  service: name=apache2 state=restarted
+  service:
+    name: apache2
+    state: restarted
 
 - name: restart postgres
-  service: name=postgresql state=restarted
+  service:
+    name: postgresql
+    state: restarted
+
+- name: update binary config
+  command: util/update-config.pl
+  args:
+    chdir: "{{ sl_httpd_path }}"
+
+- name: run tests
+  command: prove -r t
+  args:
+    chdir: "{{ sl_httpd_path }}"

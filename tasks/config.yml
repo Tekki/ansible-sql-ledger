@@ -1,9 +1,10 @@
 ---
 
-- name: copy config files
+- name: config file
   template:
-    src: "{{ item }}.j2"
-    dest: "{{ sl_httpd_path }}/{{ item }}"
-  loop:
-    - sql-ledger.conf
-    - wlprinter.conf
+    src: sql-ledger_yml.j2
+    dest: "{{ sl_httpd_path }}/config/sql-ledger.yml"
+  notify: update binary config
+
+- include_tasks: set_admin_pwd.yml
+  when: sl_admin_pwd is defined
