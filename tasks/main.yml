@@ -17,7 +17,7 @@
   tags: [sl-basics]
 - import_tasks: database.yml
   tags: [sl-database]
-- include_tasks: latex.yml
+- import_tasks: latex.yml
   when: sl_latex
   tags: [sl-latex]
 - import_tasks: program.yml
