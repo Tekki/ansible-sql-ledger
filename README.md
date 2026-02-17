@@ -130,13 +130,13 @@ To install a server with
 set the parameters in `sl_server_vars.yml` to 
 
 ```yaml
-lx_locales:
+sl_lx_locales:
   - de_CH
   - fr_CH
   - it_CH
-lx_default_locale: de_CH
-lx_timezone: Europe/Zurich
-texlive_languages:
+sl_lx_default_locale: de_CH
+SL_lx_timezone: Europe/Zurich
+sl_texlive_languages:
   - german
   - french
   - italian
@@ -201,6 +201,6 @@ ansible-playbook sql-ledger.yml -t sl-program
 
 ## Copyright and License
 
-© 2016-2025 Tekki (Rolf Stöckli)
+© 2016-2026 Tekki (Rolf Stöckli)
 
 [GPL3](LICENSE)
