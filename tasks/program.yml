@@ -35,3 +35,4 @@
     state: directory
     owner: "{{ sl_httpd_user }}"
     group: "{{ sl_httpd_group }}"
+    mode: '0700'
