@@ -11,6 +11,7 @@ sl_texlive_languages:
 sl_debian_packages:
   - apache2
   - cpanminus
+  - file
   - git-core
   - gpg
   - gpg-agent
