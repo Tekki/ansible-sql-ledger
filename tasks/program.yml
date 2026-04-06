@@ -23,8 +23,8 @@
     group: "{{ sl_httpd_group }}"
     recurse: true
   loop:
-    - css
     - images
+    - notes
     - spool
     - templates
     - users
